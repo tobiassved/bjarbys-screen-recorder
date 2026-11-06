@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bjarbys skärminspelare</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="page">
+  <div class="head"><h1>Bjarbys skärminspelare</h1><span class="tag">Windows-prototyp</span><span class="spacer"></span>
+    <span class="dim" id="hotkey">Ctrl+Skift+R startar och stoppar</span></div>
+  <div id="warnings" style="display:grid;gap:8px"></div>
+
+  <section class="card">
+    <div style="display:flex;align-items:center;gap:10px"><h2>Vad ska spelas in?</h2><span class="spacer"></span>
+      <button id="refresh" class="ghost">↻ Uppdatera</button></div>
+    <div class="sources" id="sources"><span class="dim">Hämtar skärmar och fönster…</span></div>
+    <div class="row">
+      <label><input type="checkbox" id="mic" checked> Mikrofon</label>
+      <label title="Eko- och brusreducering i mikrofonen (Chromiums egen)"><input type="checkbox" id="clean" checked> Rensa mikrofonen</label>
+      <label><input type="checkbox" id="system" checked> Datorljud</label>
+      <label><input type="checkbox" id="camera"> Kamera</label>
+      <label>Nedräkning <select id="countdown"><option value="0">ingen</option><option value="3" selected>3 s</option><option value="5">5 s</option></select></label>
+      <span class="spacer"></span>
+      <button class="rec" id="record" disabled>● Spela in</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <div style="display:flex;align-items:center;gap:10px"><h2>Bibliotek</h2><span class="dim" id="libpath"></span></div>
+    <div class="lib" id="lib"><span class="dim">Inga inspelningar än.</span></div>
+  </section>
+</div>
+<script type="module" src="app.js"></script>
+</body></html>

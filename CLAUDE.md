@@ -70,6 +70,14 @@ open Skarminspelare.xcodeproj
   `Localizable.xcstrings` eller saknar engelska. xcodebuild extraherar dem men skriver inte in
   dem i katalogen (bara Xcode-fönstret gör det). `… add fil.json` lägger in `{"sv": "en"}`.
 
+## Windows-prototypen
+
+`windows/` är en Electron-port (egen `package.json`, se `windows/README.md`): samma datamodell
+(`.bsrec`, `events.jsonl`, `project.json`), spåren som WebM, redigeraren i HTML/Canvas. Logiken i
+`windows/lib/` är en port av `RecorderKit/Motion` + `Project` och provas med `cd windows && npm test`.
+Det som bara finns på Windows är oprovat tills någon kört testlistan i `windows/README.md`.
+Rör den inte från macOS-koden — de delar format, inte kod.
+
 ## Struktur
 
 - `App/` — gränssnittet (menyrad, HUD, områdesväljare, bibliotek, redigerare). Svenska i

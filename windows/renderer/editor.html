@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'">
+<title>Redigerare — Bjarbys skärminspelare</title><link rel="stylesheet" href="style.css"></head>
+<body class="editor">
+<header class="top">
+  <input class="title" id="title" placeholder="Namn på inspelningen" spellcheck="false">
+  <span class="status" id="status"></span><span class="spacer"></span>
+  <button id="export" class="primary">Exportera…</button>
+</header>
+<div class="work">
+  <section class="stage">
+    <div class="canvas-wrap"><canvas id="cv" width="1920" height="1080"></canvas></div>
+    <div class="transport">
+      <button id="play" title="Mellanslag" style="width:44px">▶</button>
+      <span class="time" id="time">0:00 / 0:00</span>
+      <span class="spacer"></span>
+      <button id="split" title="S">✂ Dela</button>
+      <button id="del" title="Delete">Ta bort del</button>
+      <button id="zoomAdd" title="Z">＋ Zoom här</button>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-body" id="tlbody">
+        <div class="ruler" id="ruler"></div>
+        <div class="lane" id="laneSeg"><label>Klipp</label></div>
+        <div class="lane" id="laneZoom"><label>Zoom</label></div>
+        <div class="lane" id="laneClick"><label>Klick</label></div>
+        <div class="playhead" id="playhead"></div>
+      </div>
+    </div>
+  </section>
+  <aside class="inspector">
+    <nav class="tabs" id="tabs">
+      <button data-tab="style" class="on">Stil</button><button data-tab="cursor">Markör</button>
+      <button data-tab="zoom">Zoom</button><button data-tab="cut">Klipp</button>
+    </nav>
+    <div class="pane" id="pane"></div>
+  </aside>
+</div>
+
+<dialog id="exp">
+  <h2>Exportera</h2>
+  <div class="grid" id="expForm">
+    <label>Format<select id="expFormat">
+      <option value="mp4">MP4 (H.264 + AAC)</option><option value="webm">WebM (VP9 + Opus)</option><option value="gif">GIF (800 px, 15 bilder/s)</option></select></label>
+    <label>Storlek<select id="expSize"><option value="1920">Full HD (1920)</option><option value="1280">HD (1280)</option><option value="2560">QHD (2560)</option></select></label>
+    <label>Bildfrekvens<select id="expFps"><option value="30">30 bilder/s</option><option value="60">60 bilder/s</option></select></label>
+    <div class="banner info" id="expNote">Exporten spelas upp i realtid. Lämna fönstret synligt tills den är klar.</div>
+  </div>
+  <div id="expProgress" hidden><div class="bar"><i id="expBar"></i></div><p class="dim" id="expText"></p></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button id="expCancel">Avbryt</button><button id="expGo" class="primary">Exportera</button>
+  </div>
+</dialog>
+
+<script type="module" src="editor.js"></script>
+</body></html>

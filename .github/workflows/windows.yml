@@ -1,0 +1,38 @@
+name: Windows-prototyp
+
+# Bygger Windows-versionen (windows/) på en riktig Windows-dator och lägger installationsfilen
+# som artefakt. Körs för hand (Actions → Windows-prototyp → Run workflow) och vid ändringar i windows/.
+on:
+  workflow_dispatch:
+  push:
+    paths: ['windows/**', '.github/workflows/windows.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  bygg:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: windows
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: windows/package-lock.json
+      - run: npm ci
+      - name: Enhetsprov (rena modulerna)
+        run: npm test
+      - name: Bygg installationsfil
+        run: npm run dist
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'   # ingen kodsignering i prototypen
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bjarbys-skarminspelare-windows
+          path: |
+            windows/dist/*.exe
+          if-no-files-found: error
